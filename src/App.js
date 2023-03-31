@@ -14,7 +14,7 @@ const App = () => {
     setLoading(true);
     const generateFakeData = () => {
       const fakeData = [];
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 100000; i++) {
         fakeData.push({
           id: faker.datatype.uuid(),
           username: faker.internet.userName(),
