@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { List, AutoSizer } from "react-virtualized";
 import "react-virtualized/styles.css";
+import SelectedCarModel from "./components/SelectedCarModel";
+import UserDetails from "./components/UserDetails";
 import "./Userlist.css";
 const Userlist = ({ data }) => {
   const [buttonActive, setButtonActive] = useState("users");
@@ -16,6 +18,8 @@ const Userlist = ({ data }) => {
     setSelectedUser(user);
     setUserActive(user);
   };
+
+  // handle Car model
   const handleCarClick = (model) => {
     setUserActive(model);
 
@@ -26,10 +30,10 @@ const Userlist = ({ data }) => {
     );
     setUserCarModel(findUser);
   };
+
+  // to get unique car model from array
   const userCarsModel = data.map((ele) => ele.vehicle_information.model);
   const uniqueCarModel = [...new Set(userCarsModel)];
-
-  console.log("unique", [...new Set(userCarsModel)]);
 
   const rowRenderer = ({ key, index, style }) => {
     setSelectedModel(null);
@@ -49,9 +53,9 @@ const Userlist = ({ data }) => {
       </div>
     );
   };
-  const rowRendererCar = ({ key, index, style }) => {
+  const rowCarRenderer = ({ key, index, style }) => {
     const modelName = uniqueCarModel[index];
-
+    console.log(modelName);
     return (
       <div key={key} style={style}>
         <div
@@ -64,58 +68,8 @@ const Userlist = ({ data }) => {
           {modelName}
         </div>
       </div>
-
-      //   </div>
     );
   };
-
-  const renderCarModelUser = () => {
-    if (!selectedModel) {
-      return (
-        <div className={`${selectedModel ? "user-list-display" : "no-data"}`}>
-          This Car Model does have more
-        </div>
-      );
-    }
-    return (
-      <div className={`${selectedModel ? "user-list-display" : "no-data"}`}>
-        <h2>Car Model Users</h2>
-        {userCarModel.map((user) => (
-          <h4 key={user.id} className={``}>
-            {user.username}
-          </h4>
-        ))}
-      </div>
-    );
-  };
-  const renderUserDetails = () => {
-    if (!selectedUser) {
-      return (
-        <div className={`${selectedUser ? "user-list-display" : "no-data"}`}>
-          Please select a user from the list
-        </div>
-      );
-    }
-    return (
-      <div className={`${selectedUser ? "user-list-display" : "no-data"}`}>
-        <h2>User Details</h2>
-        <h2>{selectedUser.username}</h2>
-        <p>Age: {selectedUser.age}</p>
-        <p>Address: {selectedUser.address}</p>
-        <p>Country: {selectedUser.country}</p>
-        <p>Occupation: {selectedUser.occupation}</p>
-        <p>Vehicle Information:</p>
-        <ul>
-          <li>Model: {selectedUser?.vehicle_information?.model}</li>
-          <li>Age: {selectedUser?.vehicle_information?.age}</li>
-          <li>
-            Manufacturer: {selectedUser?.vehicle_information?.manufacturer}
-          </li>
-        </ul>
-      </div>
-    );
-  };
-
   return (
     <div className="list-container">
       <div className="list">
@@ -176,7 +130,7 @@ const Userlist = ({ data }) => {
                     width={315}
                     rowHeight={30}
                     rowCount={uniqueCarModel.length}
-                    rowRenderer={rowRendererCar}
+                    rowRenderer={rowCarRenderer}
                   />
                 </>
               )}
@@ -185,9 +139,15 @@ const Userlist = ({ data }) => {
         )}
       </div>
       <div>
-        {toggle === "users" ? renderUserDetails() : renderCarModelUser()}
+        {toggle === "users" ? (
+          <UserDetails selectedUser={selectedUser} />
+        ) : (
+          <SelectedCarModel
+            userCarModel={userCarModel}
+            selectedModel={selectedModel}
+          />
+        )}
       </div>
-      <div>{}</div>
     </div>
   );
 };

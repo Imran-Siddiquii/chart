@@ -22,6 +22,7 @@
   border-radius: 2px;
   font-weight: 700;
   letter-spacing: 1px;
+
 }
 
 .user-name{
@@ -112,7 +113,7 @@
       position: "absolute";
       width: 350px;
       /* left:100%; */
-      z-index: 9;
+      /* z-index: 9999999; */
       border-radius: 10px; 
       box-shadow: 2px 2px 15px 2px rgba(65, 105, 225,0.6);
       margin-left: 101%;
