@@ -1,6 +1,9 @@
 :root {
   --bg-color: rgb(65, 105, 225);
 }
+body{
+  background-color: rgb(252, 252, 255);
+}
 .App-header {
   background-color: white;
   min-height: 100vh;
@@ -9,7 +12,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
 }
 
 .full-height {
@@ -28,6 +31,7 @@
   position: absolute;
   margin: 0px auto;
   top: 30;
+z-index: 1;
   align-items: center;
   justify-content: center;
 }
@@ -51,4 +55,41 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.hambugger{
+  display: none;
+}
+@media only screen and (max-width: 991px){
+
+  .hambugger{
+      display: inline;
+  }
+  .full-height {
+    position: fixed;
+    top: 0;
+    background-color: white;
+    left: 0;
+    margin: 0px;
+    height: min-content;
+    z-index: 99999;
+    width: 100%;
+    border: 1px solid rgb(32, 132, 247);
+  }
+  .normal {
+    width: 100%;
+    left: 0%;
+    display: grid;
+    position: absolute;
+    margin: 60px auto;
+    /* top: ; */
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+  }
+  .user-info{
+    position: sticky !important;
+    top: 0;
+    z-index: 99999;
+  } 
 }

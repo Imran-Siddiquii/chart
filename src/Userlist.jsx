@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { List, AutoSizer } from "react-virtualized";
 import "react-virtualized/styles.css";
 import SelectedCarModel from "./components/SelectedCarModel";
-import UserDetails from "./components/UserDetails";
+import SelectedUserDetails from "./components/SelectedUserDetails";
 import "./Userlist.css";
+import { GiHamburgerMenu } from "react-icons/gi";
 const Userlist = ({ data }) => {
   const [buttonActive, setButtonActive] = useState("users");
   const [selectedUser, setSelectedUser] = useState(null);
@@ -14,6 +15,7 @@ const Userlist = ({ data }) => {
   const [userCarModel, setUserCarModel] = useState([]);
   // to show which user and model are active
   const [userActive, setUserActive] = useState(null);
+  const [toggleNavbar, setToggleNavbar] = useState(true);
   const handleClick = (user) => {
     setSelectedUser(user);
     setUserActive(user);
@@ -22,7 +24,6 @@ const Userlist = ({ data }) => {
   // handle Car model
   const handleCarClick = (model) => {
     setUserActive(model);
-
     setSelectedModel(model);
     setSelectedUser(null);
     const findUser = data.filter(
@@ -73,80 +74,94 @@ const Userlist = ({ data }) => {
   return (
     <div className="list-container">
       <div className="list">
-        <h2 className="user-info">Users Information</h2>
-        <div className="user-button">
-          <button
-            className={`${buttonActive === toggle ? "active-button" : ""} `}
-            onClick={() => {
-              setSelectedUser(null);
-              setToggle("users");
-              setButtonActive("users");
-            }}
-          >
-            Users Details
-          </button>
-          <button
-            className={`${buttonActive !== toggle ? "active-button" : ""} `}
-            onClick={() => {
-              setToggle("Car-models");
-              setSelectedUser(null);
-            }}
-          >
-            Cars Model
-          </button>
+        <h2 className="user-info">
+          Users Information{" "}
+          <span className="hambugger">
+            <GiHamburgerMenu
+              className="hambugger"
+              onClick={() => setToggleNavbar(!toggleNavbar)}
+            />
+          </span>
+        </h2>
+        <div className={`${toggleNavbar ? "openNavbar" : "hideNavbar"}`}>
+          <div className="user-button">
+            <button
+              className={`${buttonActive === toggle ? "active-button" : ""} `}
+              onClick={() => {
+                setSelectedUser(null);
+                setToggle("users");
+                setButtonActive("users");
+              }}
+            >
+              Users Details
+            </button>
+            <button
+              className={`${buttonActive !== toggle ? "active-button" : ""} `}
+              onClick={() => {
+                setToggle("Car-models");
+                setSelectedUser(null);
+              }}
+            >
+              Cars Model
+            </button>
+          </div>
+          {toggle === "users" ? (
+            <>
+              <div className="details-header">
+                <span className="user-name">User Name</span>{" "}
+                <span className="user-age">User Age</span>
+              </div>
+              <div className="user-list">
+                <AutoSizer>
+                  {({ height, width }) => (
+                    <>
+                      <List
+                        className="user-list-data"
+                        height={height}
+                        width={width}
+                        rowHeight={30}
+                        rowCount={data.length}
+                        rowRenderer={rowRenderer}
+                      />
+                    </>
+                  )}
+                </AutoSizer>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="details-header">
+                <span className="model-header">Cars Model Name</span>
+              </div>
+              <div className="user-list">
+                <AutoSizer>
+                  {({ height, width }) => (
+                    <>
+                      <List
+                        className="user-list1"
+                        height={height}
+                        width={width}
+                        rowHeight={30}
+                        rowCount={uniqueCarModel.length}
+                        rowRenderer={rowCarRenderer}
+                      />
+                    </>
+                  )}
+                </AutoSizer>
+              </div>
+            </>
+          )}
         </div>
-        {toggle === "users" ? (
-          <>
-            <div className="details-header">
-              <span className="user-name">User Name</span>{" "}
-              <span className="user-age">User Age</span>
-            </div>
-            <AutoSizer>
-              {({ height, width }) => (
-                <>
-                  <List
-                    className="user-list"
-                    height={500}
-                    width={315}
-                    rowHeight={30}
-                    rowCount={data.length}
-                    rowRenderer={rowRenderer}
-                  />
-                </>
-              )}
-            </AutoSizer>
-          </>
-        ) : (
-          <>
-            <div className="details-header">
-              <span className="model-header">Cars Model Name</span>
-            </div>
-            <AutoSizer>
-              {({ height, width }) => (
-                <>
-                  <List
-                    className="user-list1"
-                    height={525}
-                    width={315}
-                    rowHeight={30}
-                    rowCount={uniqueCarModel.length}
-                    rowRenderer={rowCarRenderer}
-                  />
-                </>
-              )}
-            </AutoSizer>
-          </>
-        )}
-      </div>
-      <div>
-        {toggle === "users" ? (
-          <UserDetails selectedUser={selectedUser} />
-        ) : (
-          <SelectedCarModel
-            userCarModel={userCarModel}
-            selectedModel={selectedModel}
-          />
-        )}
+        <div>
+          {toggle === "users" ? (
+            <SelectedUserDetails className="" selectedUser={selectedUser} />
+          ) : (
+            <SelectedCarModel
+              userCarModel={userCarModel}
+              selectedModel={selectedModel}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

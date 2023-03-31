@@ -27,10 +27,8 @@
 
 .user-name{
   padding: 10px 20px;
-
 }
 .user-age{
-
   padding: 10px 20px;
 
 }
@@ -54,10 +52,16 @@
   /* border: 1px solid white; */
   color: var(--bg-color);
   letter-spacing: 1px;
-  display: flex;
+  display: flex;  
   justify-content: space-between;
 }
- .user-list{  cursor: pointer;
+ .user-list{
+  position: absolute;
+  width: 100%; 
+  height: 75vh;
+}
+.user-list-data{
+  cursor: pointer;
 }
 .user-list1{
   cursor: pointer;
@@ -82,23 +86,23 @@
   background: #2c53be; 
 }
 
- .user-list::-webkit-scrollbar{
+ .user-list-data::-webkit-scrollbar{
     width: 8px;
   }
 
- .user-list::-webkit-scrollbar-track {
+ .user-list-data::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px var(--bg-color); 
     border-radius: 10px;
   }
    
   /* Handle */
- .user-list::-webkit-scrollbar-thumb {
+ .user-list-data::-webkit-scrollbar-thumb {
     background: var(--bg-color); 
     border-radius: 10px;
   }
   
   /* Handle on hover */
- .user-list::-webkit-scrollbar-thumb:hover {
+ .user-list-data::-webkit-scrollbar-thumb:hover {
     background: #2c53be; 
   }
 
@@ -109,23 +113,60 @@
   }
 
   .user-list-display{
-      display: block;
-      position: "absolute";
-      width: 350px;
-      /* left:100%; */
-      /* z-index: 9999999; */
+    display: block;
+    position: fixed;
+    z-index:99 !important;
+      width: 20%;
       border-radius: 10px; 
       box-shadow: 2px 2px 15px 2px rgba(65, 105, 225,0.6);
-      margin-left: 101%;
-      padding: "15px 10px";
-      min-height: "fit-content";
-      overflow-y: "auto";
+      left: 23%;
+      padding: 0px 0px 5px 0;
+      height: 65vh;
+      overflow-y: auto;
       /* cursor: pointer; */
-      /* border: 1px solid red;  */
   }
+
   .no-data{
     display: none;
+   
   }
+  
+  .sticky-header{
+    color: white;
+    background-color:var(--bg-color);
+    position:sticky;
+margin: 0;
+letter-spacing: 1px;
+    top: 0;
+    z-index: 999;
+    padding: 5px 6px;
+  }
+
+  /*   to scroll bar for details  */
+  .user-list-display::-webkit-scrollbar{
+    width: 8px;
+  }
+
+ .user-list-display::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px var(--bg-color); 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+ .user-list-display::-webkit-scrollbar-thumb {
+    background: var(--bg-color); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+ .user-list-display::-webkit-scrollbar-thumb:hover {
+    background: #2c53be; 
+  }
+
+
+
+
+
   .active{
     text-decoration: underline;
     color: black;
@@ -135,3 +176,52 @@
 
     text-decoration: underline;
   }
+
+
+  .selected-user-details{
+    padding: 2px 15px;
+    letter-spacing: 1px;
+  }
+  .seleted-user-header{
+    background-color: var(--bg-color);
+    color: white;
+    padding: 5px 6px;
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+
+
+  /* // to make responsive the website */
+
+
+  .hambugger{
+    display: none;
+  }
+  @media only screen and (max-width: 991px){
+
+    .hambugger{
+        display: inline;
+    }
+    .openNavbar{
+      display: block;
+
+    }
+    .hideNavbar{
+      display: none;
+    }
+    .user-list-display{
+      display: block;
+      position: relative;
+      z-index:99 !important;
+        width: 60%;
+        border-radius: 10px; 
+        box-shadow: 2px 2px 15px 2px rgba(65, 105, 225,0.6);
+        right: 0;
+        padding: 0px 0px 5px 0;
+        height: 65vh;
+        overflow-y: auto;
+        /* cursor: pointer; */
+    }
+
+}

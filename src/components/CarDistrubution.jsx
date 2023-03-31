@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Tooltip, Legend, PieChart, Pie, Cell } from "recharts";
+import {
+  Tooltip,
+  Legend,
+  PieChart,
+  Pie,
+  Cell,
+  PolarAngleAxis,
+  ResponsiveContainer,
+} from "recharts";
 
 const CarDistrubution = ({ data }) => {
   const [ageRange, setAgeRange] = useState(null);
@@ -75,7 +83,7 @@ const CarDistrubution = ({ data }) => {
             </option>
           ))}
         </select>
-        <PieChart width={400} height={400}>
+        <PieChart width={800} height={700}>
           <Legend />
           <Tooltip />
           <Pie
@@ -83,7 +91,7 @@ const CarDistrubution = ({ data }) => {
             data={carModelChartData}
             cx="50%"
             cy="50%"
-            outerRadius={100}
+            outerRadius={200}
             fill="#8884d8"
             label={({ name, value }) => `${name} (${value})`}
           >
@@ -97,45 +105,48 @@ const CarDistrubution = ({ data }) => {
         </PieChart>
       </div>
       {/* for car age filter */}
-      <div>
-        <h2>Car Age Distribution</h2>
-        <select
-          onChange={(event) =>
-            setAgeRange(
-              event.target.value
-                ? event.target.value.split("-").map(Number)
-                : null
-            )
-          }
-        >
-          <option value="">All Ages</option>
-          {[...Array(9)].map((_, index) => (
-            <option key={index} value={`${index * 5}-${index * 5 + 4}`}>
-              {`${index * 5} - ${index * 5 + 4}`}
-            </option>
-          ))}
-        </select>
-        <PieChart width={400} height={400}>
-          <Legend />
-          <Tooltip />
-          <Pie
-            dataKey="value"
-            data={carAgeChartData}
-            cx="50%"
-            cy="50%"
-            outerRadius={100}
-            fill="#8884d8"
-            label={({ name, value }) => `${name} (${value})`}
+      <ResponsiveContainer width={700} height="80%">
+        <div>
+          <h2>Car Age Distribution</h2>
+          <select
+            onChange={(event) =>
+              setAgeRange(
+                event.target.value
+                  ? event.target.value.split("-").map(Number)
+                  : null
+              )
+            }
           >
-            {carAgeChartData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
+            <option value="">All Ages</option>
+            {[...Array(9)].map((_, index) => (
+              <option key={index} value={`${index * 5}-${index * 5 + 4}`}>
+                {`${index * 5} - ${index * 5 + 4}`}
+              </option>
             ))}
-          </Pie>
-        </PieChart>
-      </div>
+          </select>
+          <PieChart width={800} height={700}>
+            <Legend />
+            <Tooltip />
+            <PolarAngleAxis height={200} />
+            <Pie
+              dataKey="value"
+              data={carAgeChartData}
+              cx="50%"
+              cy="50%"
+              outerRadius={200}
+              fill="#8884d8"
+              label={({ name, value }) => `${name} (${value})`}
+            >
+              {carAgeChartData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+          </PieChart>
+        </div>
+      </ResponsiveContainer>
     </div>
   );
 };

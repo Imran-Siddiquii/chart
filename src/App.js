@@ -14,7 +14,7 @@ const App = () => {
     setLoading(true);
     const generateFakeData = () => {
       const fakeData = [];
-      for (let i = 0; i < 100000; i++) {
+      for (let i = 0; i < 100; i++) {
         fakeData.push({
           id: faker.datatype.uuid(),
           username: faker.internet.userName(),
@@ -51,7 +51,11 @@ const App = () => {
             <Userlist data={generatedData} />
           </div>
           <div className="normal">
+            <h2 className="" style={{ color: "0", background: "royalblue" }}>
+              Charts Based on the users country and cars{" "}
+            </h2>
             <Chart data={generatedData} />
+
             <h2
               className=""
               style={{

@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 
 const Chart = ({ data }) => {
@@ -26,19 +27,22 @@ const Chart = ({ data }) => {
   return (
     <div>
       <h2>Bar Chart of user basis of the Country</h2>
-      <BarChart
-        width={600}
-        height={300}
-        data={countryChartData}
-        margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="country" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="users" fill="#8884d8" />
-      </BarChart>
+      <ResponsiveContainer>
+        <BarChart
+          // style={{ width: "800px", height: "400px" }}
+          width={800}
+          height={400}
+          data={countryChartData}
+          margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="country" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="users" fill="rgb(65, 105, 225)" />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 };

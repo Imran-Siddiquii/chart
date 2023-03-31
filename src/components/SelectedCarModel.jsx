@@ -10,10 +10,18 @@ const SelectedCarModel = ({ userCarModel, selectedModel }) => {
   }
   return (
     <div className={`${selectedModel ? "user-list-display" : "no-data"}`}>
-      <h2>Car Model Users</h2>
-      {userCarModel.map((user) => (
-        <h4 key={user.id}>{user.username}</h4>
-      ))}
+      <h2 className="sticky-header">Car Model Users</h2>
+      <div>
+        {userCarModel.map((user) => (
+          <h4
+            key={user.id}
+            className=""
+            style={{ padding: "5px 10px", letterSpacing: "1px" }}
+          >
+            {user.username}
+          </h4>
+        ))}
+      </div>
     </div>
   );
 };

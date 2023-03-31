@@ -1,5 +1,12 @@
 import React from "react";
-import { Tooltip, Legend, PieChart, Pie, Cell } from "recharts";
+import {
+  Tooltip,
+  Legend,
+  PieChart,
+  Pie,
+  Cell,
+  // ResponsiveContainer,
+} from "recharts";
 
 const CarCharts = ({ data }) => {
   const carData = data.reduce((acc, data) => {
@@ -41,8 +48,18 @@ const CarCharts = ({ data }) => {
     <div>
       {carChartData.map((makerData, i) => (
         <div key={i}>
-          <h2>{makerData.name}</h2>
-          <PieChart width={400} height={400}>
+          {" "}
+          <h2
+            style={{
+              textAlign: "center",
+              margin: "40px 0px",
+              color: "royalblue",
+            }}
+          >
+            {makerData.name}
+          </h2>
+          {/* <ResponsiveContainer width="100%" height={400}> */}
+          <PieChart width={800} height={700} zIndex={1}>
             <Legend />
             <Tooltip />
             <Pie
@@ -50,18 +67,20 @@ const CarCharts = ({ data }) => {
               data={makerData.data}
               cx="50%"
               cy="50%"
-              outerRadius={100}
+              outerRadius={200}
               fill="#8884d8"
               label={({ name, value }) => `${name} (${value})`}
             >
               {makerData.data.map((entry, index) => (
                 <Cell
+                  zIndex={1}
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
                 />
               ))}
             </Pie>
           </PieChart>
+          {/* </ResponsiveContainer> */}
         </div>
       ))}
     </div>
