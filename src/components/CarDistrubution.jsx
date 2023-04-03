@@ -64,9 +64,21 @@ const CarDistrubution = ({ data }) => {
     "#FFA07A",
   ];
   return (
-    <div>
+    <div className="chart-container">
       <div>
-        <h2>Car Model Distribution</h2>
+        <h2
+          style={{
+            background: "rgb(65, 105, 225)",
+            color: "white",
+            padding: "5px 15px",
+          }}
+        >
+          Car Model Distribution
+        </h2>
+        <span style={{ color: "rgb(65, 105, 225)" }}>
+          {" "}
+          Filter by Age users age :{" "}
+        </span>
         <select
           onChange={(event) =>
             setModelRange(
@@ -107,7 +119,19 @@ const CarDistrubution = ({ data }) => {
       {/* for car age filter */}
       <ResponsiveContainer width={700} height="80%">
         <div>
-          <h2>Car Age Distribution</h2>
+          <h2
+            style={{
+              background: "rgb(65, 105, 225)",
+              color: "white",
+              padding: "5px 15px",
+            }}
+          >
+            Car Age Distribution
+          </h2>
+          <span style={{ color: "rgb(65, 105, 225)" }}>
+            {" "}
+            Filter by car age :{" "}
+          </span>{" "}
           <select
             onChange={(event) =>
               setAgeRange(

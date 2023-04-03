@@ -75,7 +75,7 @@ const Userlist = ({ data }) => {
     <div className="list-container">
       <div className="list">
         <h2 className="user-info">
-          Users Information{" "}
+          Users Information
           <span className="hambugger">
             <GiHamburgerMenu
               className="hambugger"
@@ -154,7 +154,7 @@ const Userlist = ({ data }) => {
         </div>
         <div>
           {toggle === "users" ? (
-            <SelectedUserDetails className="" selectedUser={selectedUser} />
+            <SelectedUserDetails selectedUser={selectedUser} />
           ) : (
             <SelectedCarModel
               userCarModel={userCarModel}

@@ -45,7 +45,7 @@ const CarCharts = ({ data }) => {
     "#FFA07A",
   ];
   return (
-    <div>
+    <div className="chart-container">
       {carChartData.map((makerData, i) => (
         <div key={i}>
           {" "}
